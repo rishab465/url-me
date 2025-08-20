@@ -8,7 +8,11 @@ import Url from "./models/model.js"
 import router from "./routes/router.js";
 import validUrl from "valid-url"
 import cors from "cors"
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken";
+import { check , ExpressValidator } from "express-validator";
 const app = express();
+app.use(cookieParser())
 app.use(cors({
      origin: "http://localhost:5173",
 }))

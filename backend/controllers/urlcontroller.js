@@ -1,6 +1,10 @@
 import Url from "../models/model.js";
 import {nanoid} from "nanoid";
 import validUrl from "valid-url"
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken";
+import { check , ExpressValidator } from "express-validator";
+import User from "../models/modelUsers.js"
 
 
 const shortenUrl = async (req , res) =>{
@@ -51,7 +55,56 @@ const redirectUrl = async (req , res) =>{
 
 }
 
-export default {shortenUrl , redirectUrl}
+const createUser = async (req,res)=>{
+
+    try{
+        const {username , gmail , password} = req.body;
+        let user = await User.findOne({gmail})
+        if(user) return res.status(400).json({mesaage:"Email already in use"})
+        
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password , salt)
+
+        user = await User.create({username , gmail , password : hashedPassword});
+
+        const token = jwt.sign({gmail} , "shhhhhh");
+        res.cookie("token" , token , {
+            httpOnly:true
+        })
+        res.json(user)
+
+    }catch(error){
+        console.err(err.message)
+        res.status(500).send("Server Error")
+    }
+
+}
+
+const loginUser = async (req,res) => {
+    try{
+        const {gmail , password} = req.body;
+        const user = await User.findOne({gmail})
+        if(!user) return res.status(400).json({msg:"Email not found"});
+
+        const isMatch =await bcrypt.compare(password , user.password)
+        if(!isMatch) return res.status(400).json({msg:"Invalid Email or Password"})
+
+        const token = jwt.sign({gmail} , "shhhhhhh" , {expiresIn : "1h"});
+
+        res.cookie("cookie" , token , {
+            httpOnly : true
+        })
+        res.json({msg:"Login Sucessfull"})
+    } catch(error){
+
+        console.error("Error occured")
+        res.json({msg:"Error"})
+
+    }
+}
+
+export default {shortenUrl , redirectUrl , createUser , loginUser}
 
 
 
