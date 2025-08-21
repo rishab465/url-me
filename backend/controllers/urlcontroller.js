@@ -32,7 +32,7 @@ const shortenUrl = async (req , res) =>{
         }
         let short_url = `${process.env.BASE_URL}/api/url/${url_code}`
         
-        let url = await Url.create({long_url:long_url , short_url : short_url , url_code : url_code})
+        let url = await Url.create({long_url:long_url , short_url : short_url , url_code : url_code , userId:req.user.id})
         return  res.status(201).json({sucess : true , message: "Link has been shortened sucessfully" , short_url:url.short_url})
         
     }catch(error){
@@ -104,7 +104,20 @@ const loginUser = async (req,res) => {
     }
 }
 
-export default {shortenUrl , redirectUrl , createUser , loginUser}
+const getUrls = async (req , res) =>{
+    try{
+        if(!req.user){
+            return res.status(400).json({msg:"Unauthorized"});
+        }
+        const url = await Url.findOne({userId : req.user.id});
+        res.json(url);
+    }catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server Error" });
+  }
+}
+
+export default {shortenUrl , redirectUrl , createUser , loginUser , getUrls}
 
 
 

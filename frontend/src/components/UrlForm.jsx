@@ -20,8 +20,10 @@ const UrlShortener = () => {
 
       const response = await axios.post("http://localhost:3000/api/url/create", {
         long_url: longUrl,
-        custom_id:customUrl
-      });
+        custom_id:customUrl,
+      },
+        { withCredentials: true },
+      );
 
       if (response.data.short_url) {
         setShortUrl(response.data.short_url);

@@ -1,5 +1,5 @@
-import User from "../models/modelUsers"
-import cookieParser from "cookie-parser"
+import user from "../models/modelUsers.js"
+import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken"
 
 

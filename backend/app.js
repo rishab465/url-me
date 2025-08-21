@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import {nanoid} from "nanoid";
 dotenv.config()
+import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js"
 import Url from "./models/model.js"
 import router from "./routes/router.js";
@@ -15,6 +16,7 @@ const app = express();
 app.use(cookieParser())
 app.use(cors({
      origin: "http://localhost:5173",
+     credentials: true,
 }))
 app.use(express.json())
 
