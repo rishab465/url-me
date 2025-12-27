@@ -44,7 +44,7 @@ if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 const dataFile = path.join(dataDir, "urls.json");
 if (!fs.existsSync(dataFile)) fs.writeFileSync(dataFile, "[]");
 
-app.use("/api/url", router);
+app.use("/api/urls", router);
 
 app.get("/", (req, res) => {
   res.send("Backend is running ✅ (no DB)");
