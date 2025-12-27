@@ -40,6 +40,24 @@ app.use(
     credentials: true,
   }),
 );
+
+import express from "express";
+import router from "./routes/router.js";
+import cors from "cors";
+import fs from "fs";
+import path from "path";
+
+const app = express();
+app.set("trust proxy", 1);
+
+// --- SIMPLE GLOBAL CORS SETUP ---
+app.use(cors({
+  origin: "https://url-me-sigma.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
+app.options("*", cors());
+
 app.use(express.json());
 
 // Ensure data directory exists
@@ -54,8 +72,6 @@ app.get("/", (req, res) => {
   res.send("Backend is running ✅ (no DB)");
 });
 
-// Start server
-// Default to 5050 to avoid common conflicts with other local services.
 const PORT = Number(process.env.PORT || 5050);
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
