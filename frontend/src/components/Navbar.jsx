@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
-// Always dark mode, no toggle
-document.documentElement.classList.add('dark');
+export default function Navbar() {
+  React.useEffect(() => {
+    document.documentElement.classList.add('dark');
+  }, []);
 
   return (
     <header className="w-full bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm sticky top-0 z-30 border-b border-slate-200/70 dark:border-slate-800/70">
