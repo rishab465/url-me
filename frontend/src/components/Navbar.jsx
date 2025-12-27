@@ -1,21 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
-  const initialIsDark = useMemo(() => {
-    const saved = localStorage.getItem('urlme_theme');
-    if (saved === 'light') return false;
-    if (saved === 'dark') return true;
-    return document.documentElement.classList.contains('dark');
-  }, []);
-  const [isDark, setIsDark] = useState(initialIsDark);
 
-  const toggleTheme = () => {
-    const next = !isDark;
-    setIsDark(next);
-    document.documentElement.classList.toggle('dark', next);
-    localStorage.setItem('urlme_theme', next ? 'dark' : 'light');
-  };
+// Always dark mode, no toggle
+document.documentElement.classList.add('dark');
 
   return (
     <header className="w-full bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm sticky top-0 z-30 border-b border-slate-200/70 dark:border-slate-800/70">
@@ -32,15 +20,6 @@ export default function Navbar() {
             <Link to="/" className="hover:text-slate-900 dark:hover:text-white">Home</Link>
             <Link to="/docs" className="hover:text-slate-900 dark:hover:text-white">Docs</Link>
           </nav>
-
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="rounded-lg border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-900"
-            aria-label="Toggle dark mode"
-          >
-            {isDark ? 'Light' : 'Dark'}
-          </button>
         </div>
       </div>
     </header>
