@@ -16,10 +16,10 @@ const app = express();
 // This makes req.protocol reflect https when the platform terminates TLS.
 app.set("trust proxy", 1);
 
-// CORS
-// In production, prefer setting CORS_ORIGINS to a comma-separated list of allowed frontends.
-// Example: https://urlme.com,https://www.urlme.com
-const rawOrigins = process.env.CORS_ORIGINS || "";
+// Global OPTIONS handler for CORS preflight (must be before routes)
+app.options("/api/urls/*", cors(), (req, res) => {
+  res.sendStatus(204);
+});
 const allowedOrigins = rawOrigins
   .split(",")
   .map((s) => s.trim())
