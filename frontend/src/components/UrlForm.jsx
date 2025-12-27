@@ -18,7 +18,7 @@ const UrlShortener = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await api.get("/api/url/mine");
+        const res = await api.get("/api/urls/mine");
         setHistory(res.data?.urls || []);
       } catch {
         setHistory([]);
@@ -28,7 +28,7 @@ const UrlShortener = () => {
 
   const refreshHistory = async () => {
     try {
-      const res = await api.get("/api/url/mine");
+      const res = await api.get("/api/urls/mine");
       setHistory(res.data?.urls || []);
     } catch {
       setHistory([]);
@@ -46,7 +46,7 @@ const UrlShortener = () => {
 
     try {
       setLoading(true);
-      const response = await api.post(`/api/url/create`, {
+      const response = await api.post(`/api/urls/create`, {
         long_url: longUrl,
         custom_id: customUrl || undefined,
       });
@@ -93,7 +93,7 @@ const UrlShortener = () => {
       try {
         // ensure URL looks valid
         try { new URL(longUrl); } catch (e) { setPreview(null); return; }
-        const res = await api.get(`/api/url/preview`, { params: { url: longUrl } });
+        const res = await api.get(`/api/urls/preview`, { params: { url: longUrl } });
         setPreview(res.data.title || null);
       } catch (e) {
         setPreview(null);

@@ -35,25 +35,25 @@ export default function Docs() {
             <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">API</h2>
             <div className="mt-2 grid gap-2 text-sm text-slate-600 dark:text-slate-300">
               <div>
-                <span className="font-semibold text-slate-900 dark:text-slate-100">POST</span> /api/url/create
+                <span className="font-semibold text-slate-900 dark:text-slate-100">POST</span> /api/urls/create
                 <div className="text-xs text-slate-500 dark:text-slate-400">
                   Body: {"{"} long_url, custom_id? {"}"}
                 </div>
               </div>
               <div>
-                <span className="font-semibold text-slate-900 dark:text-slate-100">GET</span> /api/url/mine
+                <span className="font-semibold text-slate-900 dark:text-slate-100">GET</span> /api/urls/mine
                 <div className="text-xs text-slate-500 dark:text-slate-400">
                   Returns only your browser’s shortened URLs (cookie-scoped).
                 </div>
               </div>
               <div>
-                <span className="font-semibold text-slate-900 dark:text-slate-100">GET</span> /api/url/preview?url=...
+                <span className="font-semibold text-slate-900 dark:text-slate-100">GET</span> /api/urls/preview?url=...
                 <div className="text-xs text-slate-500 dark:text-slate-400">
                   Returns a basic title preview for a given URL.
                 </div>
               </div>
               <div>
-                <span className="font-semibold text-slate-900 dark:text-slate-100">GET</span> /api/url/:code
+                <span className="font-semibold text-slate-900 dark:text-slate-100">GET</span> /api/urls/:code
                 <div className="text-xs text-slate-500 dark:text-slate-400">
                   Redirects to the original URL.
                 </div>
