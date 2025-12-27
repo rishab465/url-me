@@ -1,23 +1,22 @@
-import {BrowserRouter as Router,Route,Routes} from "react-router-dom"
-import React from 'react'
-import Home from "./pages/Home.jsx"
-import Dashboard from "./pages/Dashboard.jsx"
-import LoginPage from './pages/LoginPage.jsx'
-import SignupPage from "./pages/SignupPage.jsx"
+import React from "react";
+import UrlShortener from "./components/UrlForm.jsx";
+import Navbar from "./components/Navbar.jsx";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Docs from "./pages/Docs.jsx";
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path = "/" element={<Home/>}/>
-        <Route path = "dashboard" element={<Dashboard/>}/>
-        <Route path = "loginpage" element={<LoginPage/>}/>
-        <Route path = "signuppage" element={<SignupPage/>}/>
-        
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-1 max-w-4xl mx-auto px-4 py-12 w-full">
+        <Routes>
+          <Route path="/" element={<UrlShortener />} />
+          <Route path="/docs" element={<Docs />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </main>
+    </div>
+  );
+};
 
-      </Routes>
-    </Router>
-  )
-}
-
-export default App
+export default App;

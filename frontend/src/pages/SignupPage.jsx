@@ -1,9 +1,3 @@
-import React from 'react'
-
-const SignupPage = () => {
-  return (
-    <div>SignupPage</div>
-  )
-}
-
-export default SignupPage
+// Signup page removed for public shortener
+import React from "react";
+export default function SignupPage(){return null}

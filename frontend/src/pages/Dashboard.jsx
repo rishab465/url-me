@@ -1,9 +1,3 @@
-import React from 'react'
-
-const Dashboard = () => {
-  return (
-    <div>Dashboard</div>
-  )
-}
-
-export default Dashboard
+// Dashboard removed for public shortener
+import React from "react";
+export default function Dashboard(){return null}

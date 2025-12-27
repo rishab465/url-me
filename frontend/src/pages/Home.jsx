@@ -1,13 +1,3 @@
-import React from 'react'
-import UrlForm from '../components/UrlForm'
-
-const Home = () => {
-  return (
-    
-      <UrlForm />
-   
-
-  )
-}
-
-export default Home
+// Home page removed; App renders UrlForm directly
+import React from "react";
+export default function Home(){return null}

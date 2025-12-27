@@ -1,0 +1,31 @@
+[
+  {
+    "url_code": "XxTzTM-K",
+    "long_url": "http://localhost:3000/api/url/XlPradpL",
+    "short_url": "http://localhost:3000/api/url/XxTzTM-K",
+    "clicks": 0,
+    "createdAt": "2025-12-27T13:09:14.970Z"
+  },
+  {
+    "url_code": "sRm9wyYO",
+    "long_url": "https://accounts.google.com/b/0/AddMailService",
+    "short_url": "http://localhost:5050/api/url/sRm9wyYO",
+    "clicks": 0,
+    "createdAt": "2025-12-27T13:28:59.059Z"
+  },
+  {
+    "url_code": "gmail",
+    "long_url": "https://accounts.google.com/b/0/AddMailService",
+    "short_url": "http://localhost:5050/api/url/gmail",
+    "clicks": 0,
+    "createdAt": "2025-12-27T13:29:08.077Z"
+  },
+  {
+    "url_code": "5UDgT-Og",
+    "long_url": "https://accounts.google.com/b/0/AddMailService",
+    "short_url": "http://localhost:5050/api/url/5UDgT-Og",
+    "clicks": 0,
+    "createdAt": "2025-12-27T13:35:08.292Z",
+    "clientId": "YveNQqfb04hvAkad23"
+  }
+]

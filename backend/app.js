@@ -1,41 +1,59 @@
-//Libraries importing 
+// Simple file-backed URL shortener server (no external DB)
 import express from "express";
 import dotenv from "dotenv";
-import {nanoid} from "nanoid";
-dotenv.config()
-import cookieParser from "cookie-parser";
-import connectDB from "./config/db.js"
-import Url from "./models/model.js"
+dotenv.config();
 import router from "./routes/router.js";
-import validUrl from "valid-url"
-import cors from "cors"
-import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken";
-import { check , ExpressValidator } from "express-validator";
+import cors from "cors";
+import fs from "fs";
+import path from "path";
+
 const app = express();
-app.use(cookieParser())
-app.use(cors({
-     origin: "http://localhost:5173",
-     credentials: true,
-}))
-app.use(express.json())
+// When running behind Render / reverse proxies, trust the forwarded protocol.
+// This makes req.protocol reflect https when the platform terminates TLS.
+app.set("trust proxy", 1);
 
-//Checking database connections
-const syncServer= async() =>{
-    await connectDB();
-}
+// CORS
+// In production, prefer setting CORS_ORIGINS to a comma-separated list of allowed frontends.
+// Example: https://urlme.com,https://www.urlme.com
+const rawOrigins = process.env.CORS_ORIGINS || "";
+const allowedOrigins = rawOrigins
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
 
-//Redirections
-app.use("/api/url" , router);
+app.use(
+  cors({
+    origin(origin, callback) {
+      // allow same-origin / server-to-server / curl
+      if (!origin) return callback(null, true);
+
+      // If not configured, allow all (useful for local dev).
+      if (allowedOrigins.length === 0) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
+    credentials: true,
+  }),
+);
+app.use(express.json());
+
+// Ensure data directory exists
+const dataDir = path.resolve("./backend/data");
+if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+const dataFile = path.join(dataDir, "urls.json");
+if (!fs.existsSync(dataFile)) fs.writeFileSync(dataFile, "[]");
+
+app.use("/api/url", router);
 
 app.get("/", (req, res) => {
-  res.send("Backend is running ✅");
+  res.send("Backend is running ✅ (no DB)");
 });
 
-//Running on port
-app.listen(3000 , ()=>{
-    console.log("Server running on port 3000")
-})
-
-syncServer();
+// Start server
+// Default to 5050 to avoid common conflicts with other local services.
+const PORT = Number(process.env.PORT || 5050);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
