@@ -42,19 +42,18 @@ app.use(
 );
 
 import express from "express";
-import router from "./routes/router.js";
 import cors from "cors";
+import router from "./routes/router.js";
 import fs from "fs";
 import path from "path";
 
 const app = express();
-app.set("trust proxy", 1);
 
-// --- SIMPLE GLOBAL CORS SETUP ---
+// ✅ CORS MUST BE FIRST
 app.use(cors({
-  origin: "https://url-me-sigma.vercel.app",
+  origin: "https://url-n019vn8h9-rishab465s-projects.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  allowedHeaders: ["Content-Type"]
 }));
 app.options("*", cors());
 
@@ -65,6 +64,11 @@ const dataDir = path.resolve("./backend/data");
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 const dataFile = path.join(dataDir, "urls.json");
 if (!fs.existsSync(dataFile)) fs.writeFileSync(dataFile, "[]");
+
+// Minimal direct test route for debugging
+app.post("/api/urls/create", (req, res) => {
+  res.json({ ok: true });
+});
 
 app.use("/api/urls", router);
 
