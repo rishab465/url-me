@@ -1,3 +1,7 @@
+// Global OPTIONS handler for CORS preflight
+app.options("*", cors(), (req, res) => {
+  res.sendStatus(204);
+});
 // Simple file-backed URL shortener server (no external DB)
 import express from "express";
 import dotenv from "dotenv";
