@@ -9,7 +9,6 @@ This README includes deployment instructions for the recommended flow:
 
 Prerequisites
 - A GitHub repository with this code pushed.
-- MongoDB Atlas account (free tier OK).
 - Accounts on Render and Vercel.
 
 Environment variables
@@ -49,7 +48,7 @@ Local development
 	npm install
 	npm run dev
 	```
-	Open http://localhost:5173 in the browser.
+	Open url-me-sigma.vercel.app in the browser.
 
 Notes & next steps
 - The app is currently public (no auth). If you want user accounts, analytics, rate-limiting, or deploy automation, I can add them.
