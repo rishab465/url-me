@@ -68,7 +68,7 @@ const shortenUrl = async (req, res) => {
     // Prefer an explicit public base URL, otherwise derive from the incoming request.
     // This works in dev with Vite proxy (host will be the Vite origin).
     const publicBase = process.env.PUBLIC_BASE_URL || `${req.protocol}://${req.get("host")}`;
-    const short_url = `${publicBase}/api/url/${url_code}`;
+    const short_url = `${publicBase}/api/urls/${url_code}`;
 
     const clientId = ensureClientId(req, res);
     const item = {
