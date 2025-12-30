@@ -47,11 +47,6 @@ if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 const dataFile = path.join(dataDir, "urls.json");
 if (!fs.existsSync(dataFile)) fs.writeFileSync(dataFile, "[]");
 
-// Minimal direct test route for debugging
-app.post("/api/urls/create", (req, res) => {
-  res.json({ ok: true });
-});
-
 app.use("/api/urls", router);
 
 app.get("/", (req, res) => {
