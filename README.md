@@ -54,4 +54,3 @@ Notes & next steps
 - The app is currently public (no auth). If you want user accounts, analytics, rate-limiting, or deploy automation, I can add them.
 - Consider enabling HTTPS and secure CORS settings when going to production.
 
-If you want, I can push any final changes and create a deployment checklist specific to your GitHub repository name and Render/Vercel settings.
